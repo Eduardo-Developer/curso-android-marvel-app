@@ -4,7 +4,7 @@ import com.edudev.core.data.repository.CharacterRepository
 import com.edudev.core.data.repository.CharactersRemoteDataSource
 import com.example.marvelapp.framework.CharacterRepositoryImpl
 import com.example.marvelapp.framework.network.response.DataWrapperResponse
-import com.example.marvelapp.framework.remote.RetrofitCharactersDataSource
+import com.example.marvelapp.presentation.characters.remote.RetrofitCharactersDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

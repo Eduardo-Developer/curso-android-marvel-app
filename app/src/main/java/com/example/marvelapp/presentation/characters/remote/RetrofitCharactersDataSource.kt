@@ -1,4 +1,4 @@
-package com.example.marvelapp.framework.remote
+package com.example.marvelapp.presentation.characters.remote
 
 import com.edudev.core.data.repository.CharactersRemoteDataSource
 import com.example.marvelapp.framework.network.MarvelApi
