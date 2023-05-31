@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
 }
 
 apply plugin: 'kotlin-kapt'
@@ -8,6 +9,10 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
 apply from: '../config/detekt/detekt.gradle'
+
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
     compileSdkVersion 33
@@ -20,6 +25,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY'])
+        buildConfigField("String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY'])
+        buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com/v1/public"'
     }
 
     buildTypes {
@@ -55,6 +63,7 @@ dependencies {
     // Material design
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.core:core-ktx:+'
 
     // Navigation
     def nav_version = '2.5.2'
@@ -73,10 +82,7 @@ dependencies {
 
 
 
-    // OkHttp
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
